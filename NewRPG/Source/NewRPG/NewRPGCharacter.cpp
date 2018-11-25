@@ -41,27 +41,36 @@ ANewRPGCharacter::ANewRPGCharacter()
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Create a decal in the world to show the cursor's location
-	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
-	CursorToWorld->SetupAttachment(RootComponent);
-	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/TopDownCPP/Blueprints/M_Cursor_Decal.M_Cursor_Decal'"));
-	if (DecalMaterialAsset.Succeeded())
-	{
-		CursorToWorld->SetDecalMaterial(DecalMaterialAsset.Object);
-	}
-	CursorToWorld->DecalSize = FVector(16.0f, 32.0f, 32.0f);
-	CursorToWorld->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f).Quaternion());
+	//// Create a decal in the world to show the cursor's location
+	//CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
+	//CursorToWorld->SetupAttachment(RootComponent);
+	//static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/TopDownCPP/Blueprints/M_Cursor_Decal.M_Cursor_Decal'"));
+	//if (DecalMaterialAsset.Succeeded())
+	//{
+	//	CursorToWorld->SetDecalMaterial(DecalMaterialAsset.Object);
+	//}
+	//CursorToWorld->DecalSize = FVector(16.0f, 32.0f, 32.0f);
+	//CursorToWorld->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f).Quaternion());
 
-	// Activate ticking in order to update the cursor every frame.
-	PrimaryActorTick.bCanEverTick = true;
-	PrimaryActorTick.bStartWithTickEnabled = true;
+	//// Activate ticking in order to update the cursor every frame.
+	//PrimaryActorTick.bCanEverTick = true;
+	//PrimaryActorTick.bStartWithTickEnabled = true;
+}
+
+void ANewRPGCharacter::BeginPlay()
+{
+	
 }
 
 void ANewRPGCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
-	if (CursorToWorld != nullptr)
+
+
+
+
+	/*if (CursorToWorld != nullptr)
 	{
 		if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
 		{
@@ -86,5 +95,16 @@ void ANewRPGCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldLocation(TraceHitResult.Location);
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
-	}
+	}*/
+}
+
+void ANewRPGCharacter::MoveLeft()
+{
+	AddActorLocalOffset(FVector(0, MaxSpeed, 0));
+
+}
+
+void ANewRPGCharacter::MoveUp()
+{
+
 }

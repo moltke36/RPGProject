@@ -46,28 +46,28 @@ void ANewRPGPlayerController::OnResetVR()
 
 void ANewRPGPlayerController::MoveToMouseCursor()
 {
-	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
-	{
-		if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
-		{
-			if (MyPawn->GetCursorToWorld())
-			{
-				UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, MyPawn->GetCursorToWorld()->GetComponentLocation());
-			}
-		}
-	}
-	else
-	{
-		// Trace to see what is under the mouse cursor
-		FHitResult Hit;
-		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+	//if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
+	//{
+	//	if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
+	//	{
+	//		if (MyPawn->GetCursorToWorld())
+	//		{
+	//			UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, MyPawn->GetCursorToWorld()->GetComponentLocation());
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	// Trace to see what is under the mouse cursor
+	//	FHitResult Hit;
+	//	GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 
-		if (Hit.bBlockingHit)
-		{
-			// We hit something, move there
-			SetNewMoveDestination(Hit.ImpactPoint);
-		}
-	}
+	//	if (Hit.bBlockingHit)
+	//	{
+	//		// We hit something, move there
+	//		SetNewMoveDestination(Hit.ImpactPoint);
+	//	}
+	//}
 }
 
 void ANewRPGPlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)
