@@ -20,7 +20,12 @@ protected:
 
 	// Begin PlayerController interface
 	virtual void PlayerTick(float DeltaTime) override;
-	virtual void SetupInputComponent() override;
+	virtual void SetupInputComponent();
+
+	void MoveUp(float Value);
+
+	void MoveRight(float Value);
+
 	// End PlayerController interface
 
 	/** Resets HMD orientation in VR. */

@@ -19,6 +19,11 @@ public:
 
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	void MoveRight(float InputAxis);
+
+	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	void MoveUp(float InputAxis);
 
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
@@ -29,11 +34,7 @@ public:
 
 private:
 
-	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	void MoveLeft();
 
-	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	void MoveUp();
 
 	///** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

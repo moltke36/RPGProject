@@ -24,19 +24,52 @@ void ANewRPGPlayerController::PlayerTick(float DeltaTime)
 	}
 }
 
+//void ANewRPGPlayerController::SetupInputComponent(class UInputComponent* PlayerInputComponent)
+//{
+//	// set up gameplay key bindings
+//	check(PlayerInputComponent);
+//	UE_LOG(LogTemp, Warning, TEXT("Right called"));
+//	// Set up gameplay key bindings
+//
+//	// Bind jump events
+//	//PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+//	//PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+//
+//	// Bind movement events
+//	PlayerInputComponent->BindAxis("MoveUp", this, &ANewRPGPlayerController::MoveUp);
+//	PlayerInputComponent->BindAxis("MoveRight", this, &ANewRPGPlayerController::MoveRight);
+//
+//}
+
 void ANewRPGPlayerController::SetupInputComponent()
 {
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
 
-	InputComponent->BindAction("SetDestination", IE_Pressed, this, &ANewRPGPlayerController::OnSetDestinationPressed);
-	InputComponent->BindAction("SetDestination", IE_Released, this, &ANewRPGPlayerController::OnSetDestinationReleased);
+	InputComponent->BindAxis("MoveUp", this, &ANewRPGPlayerController::MoveUp);
+	InputComponent->BindAxis("MoveRight", this, &ANewRPGPlayerController::MoveRight);
 
 	// support touch devices 
 	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ANewRPGPlayerController::MoveToTouchLocation);
 	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ANewRPGPlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &ANewRPGPlayerController::OnResetVR);
+}
+
+void ANewRPGPlayerController::MoveUp(float InputAxis)
+{
+	if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
+	{
+		MyPawn->MoveUp(InputAxis);
+	}
+}
+
+void ANewRPGPlayerController::MoveRight(float InputAxis)
+{
+	if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
+	{
+		MyPawn->MoveRight(InputAxis);
+	}
 }
 
 void ANewRPGPlayerController::OnResetVR()
@@ -72,41 +105,41 @@ void ANewRPGPlayerController::MoveToMouseCursor()
 
 void ANewRPGPlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)
 {
-	FVector2D ScreenSpaceLocation(Location);
+	//FVector2D ScreenSpaceLocation(Location);
 
-	// Trace to see what is under the touch location
-	FHitResult HitResult;
-	GetHitResultAtScreenPosition(ScreenSpaceLocation, CurrentClickTraceChannel, true, HitResult);
-	if (HitResult.bBlockingHit)
-	{
-		// We hit something, move there
-		SetNewMoveDestination(HitResult.ImpactPoint);
-	}
+	//// Trace to see what is under the touch location
+	//FHitResult HitResult;
+	//GetHitResultAtScreenPosition(ScreenSpaceLocation, CurrentClickTraceChannel, true, HitResult);
+	//if (HitResult.bBlockingHit)
+	//{
+	//	// We hit something, move there
+	//	SetNewMoveDestination(HitResult.ImpactPoint);
+	//}
 }
 
 void ANewRPGPlayerController::SetNewMoveDestination(const FVector DestLocation)
 {
-	APawn* const MyPawn = GetPawn();
-	if (MyPawn)
-	{
-		float const Distance = FVector::Dist(DestLocation, MyPawn->GetActorLocation());
+	//APawn* const MyPawn = GetPawn();
+	//if (MyPawn)
+	//{
+	//	float const Distance = FVector::Dist(DestLocation, MyPawn->GetActorLocation());
 
-		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if ((Distance > 120.0f))
-		{
-			UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
-		}
-	}
+	//	// We need to issue move command only if far enough in order for walk animation to play correctly
+	//	if ((Distance > 120.0f))
+	//	{
+	//		UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
+	//	}
+	//}
 }
 
 void ANewRPGPlayerController::OnSetDestinationPressed()
 {
-	// set flag to keep updating destination until released
-	bMoveToMouseCursor = true;
+	//// set flag to keep updating destination until released
+	//bMoveToMouseCursor = true;
 }
 
 void ANewRPGPlayerController::OnSetDestinationReleased()
 {
-	// clear flag to indicate we should stop updating the destination
-	bMoveToMouseCursor = false;
+	//// clear flag to indicate we should stop updating the destination
+	//bMoveToMouseCursor = false;
 }
