@@ -17,3 +17,16 @@ ANewRPGGameMode::ANewRPGGameMode()
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 }
+
+void ANewRPGGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// ...
+
+}
+
+void ANewRPGGameMode::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+}

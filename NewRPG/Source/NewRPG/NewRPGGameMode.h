@@ -13,6 +13,10 @@ class ANewRPGGameMode : public AGameModeBase
 
 public:
 	ANewRPGGameMode();
+
+	virtual void Tick(float DeltaSeconds) override;
+
+	virtual void BeginPlay() override;
 };
 
 

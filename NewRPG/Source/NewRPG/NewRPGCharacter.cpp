@@ -1,15 +1,10 @@
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 #include "NewRPGCharacter.h"
-#include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
-#include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "HeadMountedDisplayFunctionLibrary.h"
-#include "Materials/Material.h"
 #include "Engine/World.h"
 
 ANewRPGCharacter::ANewRPGCharacter()
@@ -103,7 +98,7 @@ void ANewRPGCharacter::MoveRight(float InputAxis)
 	if (InputAxis != 0)
 	{
 		AddActorLocalOffset(FVector(0, MaxSpeed*InputAxis, 0));
-		
+		GetMovementComponent()->AddInputVector(FVector(0, MaxSpeed*InputAxis, 0));
 	}
 }
 
@@ -112,5 +107,6 @@ void ANewRPGCharacter::MoveUp(float InputAxis)
 	if (InputAxis != 0)
 	{
 		AddActorLocalOffset(FVector(MaxSpeed*InputAxis, 0, 0));
+		GetMovementComponent()->AddInputVector(FVector(MaxSpeed*InputAxis, 0, 0));
 	}
 }
