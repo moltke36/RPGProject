@@ -7,15 +7,15 @@
 
 ANewRPGGameMode::ANewRPGGameMode()
 {
-	// use our custom PlayerController class
-	PlayerControllerClass = ANewRPGPlayerController::StaticClass();
+	//// use our custom PlayerController class
+	//PlayerControllerClass = ANewRPGPlayerController::StaticClass();
 
-	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TopDownCPP/Blueprints/TopDownCharacter"));
-	if (PlayerPawnBPClass.Class != NULL)
-	{
-		DefaultPawnClass = PlayerPawnBPClass.Class;
-	}
+	//// set default pawn class to our Blueprinted character
+	//static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/TopDownCPP/Blueprints/TopDownCharacter"));
+	//if (PlayerPawnBPClass.Class != NULL)
+	//{
+	//	DefaultPawnClass = PlayerPawnBPClass.Class;
+	//}
 }
 
 void ANewRPGGameMode::BeginPlay()
