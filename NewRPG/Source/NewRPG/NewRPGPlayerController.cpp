@@ -10,18 +10,29 @@
 ANewRPGPlayerController::ANewRPGPlayerController()
 {
 	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Crosshairs;
+	DefaultMouseCursor = EMouseCursor::Default;
+
+}
+
+void ANewRPGPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	MyPawn = Cast<ANewRPGCharacter>(GetPawn());
+	if (MyPawn == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Missing MyPawn"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("MyPawn= %s"), *MyPawn->GetName());
+	}
 }
 
 void ANewRPGPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	// keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
-	{
-		MoveToMouseCursor();
-	}
 }
 
 //void ANewRPGPlayerController::SetupInputComponent(class UInputComponent* PlayerInputComponent)
@@ -46,19 +57,17 @@ void ANewRPGPlayerController::SetupInputComponent()
 	// set up gameplay key bindings
 	Super::SetupInputComponent();
 
-	InputComponent->BindAxis("MoveUp", this, &ANewRPGPlayerController::MoveUp);
-	InputComponent->BindAxis("MoveRight", this, &ANewRPGPlayerController::MoveRight);
+	//InputComponent->BindAxis("MoveUp", this, &ANewRPGPlayerController::MoveUp);
+	//InputComponent->BindAxis("MoveRight", this, &ANewRPGPlayerController::MoveRight);
 
 	// support touch devices 
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ANewRPGPlayerController::MoveToTouchLocation);
-	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &ANewRPGPlayerController::MoveToTouchLocation);
 
 	InputComponent->BindAction("ResetVR", IE_Pressed, this, &ANewRPGPlayerController::OnResetVR);
 }
 
 void ANewRPGPlayerController::MoveUp(float InputAxis)
 {
-	if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
+	if (MyPawn != nullptr)
 	{
 		MyPawn->MoveUp(InputAxis);
 	}
@@ -66,7 +75,7 @@ void ANewRPGPlayerController::MoveUp(float InputAxis)
 
 void ANewRPGPlayerController::MoveRight(float InputAxis)
 {
-	if (ANewRPGCharacter* MyPawn = Cast<ANewRPGCharacter>(GetPawn()))
+	if (MyPawn != nullptr)
 	{
 		MyPawn->MoveRight(InputAxis);
 	}

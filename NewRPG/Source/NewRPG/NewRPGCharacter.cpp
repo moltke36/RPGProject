@@ -54,7 +54,8 @@ ANewRPGCharacter::ANewRPGCharacter()
 
 void ANewRPGCharacter::BeginPlay()
 {
-	
+	Super::BeginPlay();
+	GetMovementComponent()->Activate();
 }
 
 void ANewRPGCharacter::Tick(float DeltaSeconds)
@@ -97,7 +98,6 @@ void ANewRPGCharacter::MoveRight(float InputAxis)
 {
 	if (InputAxis != 0)
 	{
-		AddActorLocalOffset(FVector(0, MaxSpeed*InputAxis, 0));
 		GetMovementComponent()->AddInputVector(FVector(0, MaxSpeed*InputAxis, 0));
 	}
 }
@@ -106,7 +106,6 @@ void ANewRPGCharacter::MoveUp(float InputAxis)
 {
 	if (InputAxis != 0)
 	{
-		AddActorLocalOffset(FVector(MaxSpeed*InputAxis, 0, 0));
 		GetMovementComponent()->AddInputVector(FVector(MaxSpeed*InputAxis, 0, 0));
 	}
 }

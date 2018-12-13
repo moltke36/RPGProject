@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "NewRPGCharacter.generated.h"
 
+
 UCLASS(Blueprintable)
 class ANewRPGCharacter : public ACharacter
 {

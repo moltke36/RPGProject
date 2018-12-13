@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "NewRPGPlayerController.generated.h"
 
+class ANewRPGCharacter;
+
 UCLASS()
 class ANewRPGPlayerController : public APlayerController
 {
@@ -14,17 +16,27 @@ class ANewRPGPlayerController : public APlayerController
 public:
 	ANewRPGPlayerController();
 
+	ANewRPGCharacter * MyPawn;
+
+	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category = Movement)
+		void MoveUp(float Value);
+
+	UFUNCTION(BlueprintCallable, Category = Movement)
+		void MoveRight(float Value);
+
+
 protected:
-	/** True if the controlled character should navigate to the mouse cursor. */
-	uint32 bMoveToMouseCursor : 1;
+
 
 	// Begin PlayerController interface
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent();
 
-	void MoveUp(float Value);
 
-	void MoveRight(float Value);
+
+	
 
 	// End PlayerController interface
 
