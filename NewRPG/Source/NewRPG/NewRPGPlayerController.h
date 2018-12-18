@@ -21,10 +21,10 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = Movement)
-		void MoveUp(float Value);
+	void MoveUp(float Value);
 
 	UFUNCTION(BlueprintCallable, Category = Movement)
-		void MoveRight(float Value);
+	void MoveRight(float Value);
 
 
 protected:

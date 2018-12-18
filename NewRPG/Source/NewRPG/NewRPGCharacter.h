@@ -21,10 +21,10 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	void MoveRight(float InputAxis);
+	virtual void MoveRight(float InputAxis);
 
 	UFUNCTION(BlueprintCallable, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	void MoveUp(float InputAxis);
+	virtual void MoveUp(float InputAxis);
 
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
@@ -32,6 +32,10 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns CursorToWorld subobject **/
 	//FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	float MaxSpeed;
 
 private:
 
@@ -41,8 +45,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* TopDownCameraComponent;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	float MaxSpeed;
+
 
 	/** Camera boom positioning the camera above the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

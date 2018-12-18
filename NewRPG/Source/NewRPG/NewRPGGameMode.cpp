@@ -23,7 +23,6 @@ void ANewRPGGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-
 }
 
 void ANewRPGGameMode::Tick(float DeltaSeconds)

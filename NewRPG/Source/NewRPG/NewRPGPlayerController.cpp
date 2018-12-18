@@ -18,6 +18,9 @@ void ANewRPGPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// TODO: Remove this
+	DefaultMouseCursor = EMouseCursor::Default;
+
 	MyPawn = Cast<ANewRPGCharacter>(GetPawn());
 	if (MyPawn == nullptr)
 	{
